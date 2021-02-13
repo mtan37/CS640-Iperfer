@@ -8,12 +8,12 @@ public class Manager {
 	private final static short ARG_TYPE_POS = 1;
 	
 	private final static short SERVER_ARG_LENGTH = 4;
-	private final static short SERVER_ARG_PORT_POS = 2;
+	private final static short SERVER_ARG_PORT_POS = 2;//-p
 	
 	private final static short CLIENT_ARG_LENGTH = 8;
-	private final static short CLIENT_ARG_HOST_POS = 2;
-	private final static short CLIENT_ARG_PORT_POS = 4;
-	private final static short CLIENT_ARG_TIME_POS = 6;
+	private final static short CLIENT_ARG_HOST_POS = 2;//-h
+	private final static short CLIENT_ARG_PORT_POS = 4;//-p
+	private final static short CLIENT_ARG_TIME_POS = 6;//-t
 	/**
 	 * Check and validate the client/server type indicated in the command arguments
 	 * @return 1 for client, 0 for server
@@ -36,22 +36,64 @@ public class Manager {
 	 * @throws InvalidPortNumberException - provided port number has a legal format but
 	 * 		  	is in invalid range	
 	 */
-	public static HashMap<String, Object> validateArgs(String[] args, boolean isClient) throws InvalidArgsException, InvalidPortNumberException{	
-		return null;
-		//TODO
+	public static HashMap<String, Object> validateArgs(String[] args, boolean isClient) throws InvalidArgsException, InvalidPortNumberException, NumberFormatException{	
+		if(isClient) {
+			//check if the flags are in place properly
+			if(args.length != CLIENT_ARG_LENGTH)
+				throw new InvalidArgsException("Error: missing or additional arguments");
+			if(args[CLIENT_ARG_HOST_POS] != "-h")
+				throw new InvalidArgsException("Error: missing or additional arguments");
+			if(args[CLIENT_ARG_PORT_POS] != "-p")
+				throw new InvalidArgsException("Error: missing or additional arguments");
+			if(args[CLIENT_ARG_TIME_POS] != "-t")
+				throw new InvalidArgsException("Error: missing or additional arguments");
+			Integer portNum = Integer.parseInt(args[CLIENT_ARG_PORT_POS + 1]);
+			if(portNum <1024 || portNum > 65535)
+				throw new InvalidPortNumberException("Error: port number must be in the range 1024 to 65535");
+			Integer time = Integer.parseInt(args[CLIENT_ARG_TIME_POS + 1]);
+			HashMap<String, Object> argsList = new HashMap<String, Object>();
+			argsList.put("port", portNum);
+			argsList.put("time", time);
+			argsList.put("host", args[CLIENT_ARG_PORT_POS + 1]);
+			return argsList;
+		}
+		else {
+			//check if the flags are in place properly
+			if(args.length != SERVER_ARG_LENGTH)
+				throw new InvalidArgsException("Error: missing or additional arguments");
+			if(args[SERVER_ARG_PORT_POS] != "-p")
+				throw new InvalidArgsException("Error: missing or additional arguments");
+			Integer portNum = Integer.parseInt(args[SERVER_ARG_PORT_POS + 1]);
+			if(portNum <1024 || portNum > 65535)
+				throw new InvalidPortNumberException("Error: port number must be in the range 1024 to 65535");
+			HashMap<String, Object> argsList = new HashMap<String, Object>();
+			argsList.put("port", portNum);
+			return argsList;
+		}
 	}
 	
 	public static void main(String[] args) {
 		try {
 			boolean isClient = validateType(args);
-			validateArgs(args, isClient);
+			HashMap<String, Object> argsList = validateArgs(args, isClient);
+			if(isClient) {
+				//TODO
+				//create an instance of IperferClient
+				//call run
+			}
+			else {
+				//TODO
+				//create an instance of IperferServer
+				//call run
+			}
 		} catch (InvalidArgsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			e.printStackTrace();//DELETE
 		} catch (InvalidPortNumberException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			e.printStackTrace();//DELETE
+		} catch (NumberFormatException e) {
+			e.printStackTrace();//DELETE
 		}
-		
 	}
 }
