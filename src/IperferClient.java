@@ -18,8 +18,18 @@ public class IperferClient extends Iperfer {
 	/**
 	 * Runs an iperfer client which sends data to a server for a determined amount of time
 	 */
-	void run() {
+	void run(int runtime) {
 		// TODO Auto-generated method stub
+		this.time = runtime;
+		long start = System.nanoTime();
+		try {
+			conn = new Socket(serverName, serverPort);
+			
+			while(time > 0) {
+				
+			}
+		}
+		
 		
 	}
 	
