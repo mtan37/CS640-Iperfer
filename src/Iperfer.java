@@ -5,7 +5,7 @@ abstract class Iperfer {
 	/*
 	 * Runs an Iperfer instance
 	 */
-	abstract void run(int serverPort);
+	abstract void run();
 	
 	/**
 	 * Prints the number of kilobytes received and rate in megabits

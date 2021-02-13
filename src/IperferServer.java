@@ -7,7 +7,7 @@ public class IperferServer extends Iperfer {
 	}
 	
 	@Override
-	void run(int serverPort) {
+	void run() {
 		// TODO Auto-generated method stub
 		
 	}
