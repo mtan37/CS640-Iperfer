@@ -6,21 +6,21 @@ import java.net.*
 public class IperferClient extends Iperfer {
 	private String serverName;
 	private int serverPort;
-	private Socket conn; // TODO: determine type
+	private Socket conn;
 	private int time;
 	
-	IperferClient(String serverName, int serverPort){
+	IperferClient(String serverName, int serverPort, int runtime){
 		this.serverName = serverName;
 		this.serverPort = serverPort;
+		this.time = runtime;
 	}
 	
 	@Override
 	/**
 	 * Runs an iperfer client which sends data to a server for a determined amount of time
 	 */
-	void run(int runtime) {
+	void run() {
 		// TODO Auto-generated method stub
-		this.time = runtime;
 		long start = System.nanoTime();
 		try {
 			conn = new Socket(serverName, serverPort);
