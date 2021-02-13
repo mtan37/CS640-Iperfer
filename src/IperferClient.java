@@ -1,20 +1,24 @@
 package src;
 
+import java.io.*;
+import java.net.*
+
 public class IperferClient extends Iperfer {
 	private String serverName;
 	private int serverPort;
-	private Object conn; // TODO: determine type
-	private long time;
+	private Socket conn; // TODO: determine type
+	private int time;
 	
-	IperferClient(String serverName, int serverPort, int time){
-		//TODO
+	IperferClient(String serverName, int serverPort){
+		this.serverName = serverName;
+		this.serverPort = serverPort;
 	}
 	
 	@Override
 	/**
 	 * Runs an iperfer client which sends data to a server for a determined amount of time
 	 */
-	void run(int serverPort) {
+	void run() {
 		// TODO Auto-generated method stub
 		
 	}
