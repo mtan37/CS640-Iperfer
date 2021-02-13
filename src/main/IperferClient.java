@@ -8,13 +8,13 @@ public class IperferClient extends Iperfer {
 	private int serverPort;
 	private Socket conn;
 	private int time;
-
-	IperferClient(String serverName, int serverPort, int runtime) {
+	
+	IperferClient(String serverName, int serverPort, int runtime){
 		this.serverName = serverName;
 		this.serverPort = serverPort;
 		this.time = runtime;
 	}
-
+  
 	@Override
 	/**
 	 * Runs an iperfer client which sends data to a server for a determined amount of time
