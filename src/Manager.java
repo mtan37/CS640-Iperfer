@@ -1,4 +1,4 @@
-package src;
+
 import java.util.HashMap;
 import Exceptions.*;
 
@@ -54,7 +54,7 @@ public class Manager {
 			HashMap<String, Object> argsList = new HashMap<String, Object>();
 			argsList.put("port", portNum);
 			argsList.put("time", time);
-			argsList.put("host", args[CLIENT_ARG_PORT_POS + 1]);
+			argsList.put("host", args[CLIENT_ARG_HOST_POS + 1]);
 			return argsList;
 		}
 		else {
@@ -76,16 +76,20 @@ public class Manager {
 		try {
 			boolean isClient = validateType(args);
 			HashMap<String, Object> argsList = validateArgs(args, isClient);
+			Iperfer prog = null;
 			if(isClient) {
-				//TODO
 				//create an instance of IperferClient
-				//call run
+				String host = (String) argsList.get("host");
+				Integer port = (Integer) argsList.get("port");
+				Integer time = (Integer) argsList.get("time");
+				prog = new IperferClient(host, port,time);
 			}
 			else {
-				//TODO
 				//create an instance of IperferServer
-				//call run
+				Integer port = (Integer) argsList.get("port");
+				prog = new IperferServer(port);
 			}
+			prog.run();
 		} catch (InvalidArgsException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();//DELETE
