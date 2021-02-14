@@ -23,10 +23,15 @@ public class Manager {
 	 * 
 	 */
 	public static boolean validateType(String[] args) throws InvalidArgsException {
-		if (args[ARG_TYPE_POS].equals("-c")) {
-			return true;
-		} else if (args[ARG_TYPE_POS].equals("-s")) {
-			return false;
+		try {
+			if (args[ARG_TYPE_POS].equals("-c")) {
+				return true;
+			} else if (args[ARG_TYPE_POS].equals("-s")) {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			throw new InvalidArgsException("Error: missing or additional arguments");
 		}
 		throw new InvalidArgsException("Error: missing or additional arguments");
 	}
@@ -94,12 +99,13 @@ public class Manager {
 			prog.run();
 		} catch (InvalidArgsException e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();// DELETE
+			e.printStackTrace();
 		} catch (InvalidPortNumberException e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();// DELETE
+			e.printStackTrace();
 		} catch (NumberFormatException e) {
-			e.printStackTrace();// DELETE
+			System.out.println("Error: port number must be in the range 1024 to 65535");
+			e.printStackTrace();
 		}
 	}
 }
