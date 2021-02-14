@@ -9,6 +9,7 @@ import java.net.Socket;
 public class IperferServer extends Iperfer {
 
 	private static final double SEC_TO_NANO = 1_000_000_000.0;
+	private static final double KB_TO_BYTE = 1000.0;
 	private int serverPort = 0;
 	IperferServer(int serverPort) {
 		this.serverPort = serverPort;
@@ -37,8 +38,8 @@ public class IperferServer extends Iperfer {
 				//add the stored size into a larger unit
 				if(counter > 100) {
 					counter = 0;
-					long toAdd = dataSizeByte/1000;
-					dataSizeByte -= toAdd * 1000;
+					long toAdd = (long) (dataSizeByte/KB_TO_BYTE);
+					dataSizeByte -= toAdd * KB_TO_BYTE;
 					dataSizeKB += toAdd;
 				}
 				counter++;
@@ -48,7 +49,7 @@ public class IperferServer extends Iperfer {
 		//keep track to time - end
 		long end = System.nanoTime();
 		//calculate the data transfer rate in Mbps
-		double speed = (double)(dataSizeKB/1000.0)/(double)(end-start)/SEC_TO_NANO;
+		double speed = (dataSizeKB/KB_TO_BYTE)/((end-start)/SEC_TO_NANO);
 		//print out summary
 		printSummary(dataSizeKB, speed);
 		//stop the program
