@@ -30,15 +30,16 @@ public class IperferClient extends Iperfer {
 			// Continuously sends 1 KB until the end time is reached
 			long start = System.nanoTime();
 			long end = start + time*(long)NANO_CONVERS;
-			while(System.nanoTime() < end) {
+			long sent_end ;
+			while((sent_end = System.nanoTime()) < end) {
 				out.write(oneKB);
 				count++;
 			}
 			conn.close();
 			
 			// Finds the time spent and calculates the rate in Mbps
-			long totalTime = System.nanoTime() - start;
-			double rate = ((count*8/1000.0)/(totalTime/NANO_CONVERS));
+			long totalTime = sent_end - start;
+			double rate = ((count/1000.0)/(totalTime/NANO_CONVERS));
 			this.printSummary(count, rate);
 			
 		} catch(UnknownHostException e) {
