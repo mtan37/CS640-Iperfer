@@ -50,7 +50,7 @@ public class IperferClient extends Iperfer {
 		}
 	}
 	
-	void printSummary(int dataKB, double rate) {
+	void printSummary(double dataKB, double rate) {
 		System.out.println("sent=" + dataKB + " KB " + "rate=" + rate + " Mbps");
 	}
 	
