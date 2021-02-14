@@ -5,15 +5,15 @@ import Exceptions.*;
 
 public class Manager {
 
-	private final static short ARG_TYPE_POS = 1;
+	private final static short ARG_TYPE_POS = 0;
 
-	private final static short SERVER_ARG_LENGTH = 4;
-	private final static short SERVER_ARG_PORT_POS = 2;// -p
+	private final static short SERVER_ARG_LENGTH = 3;
+	private final static short SERVER_ARG_PORT_POS = 1;// -p
 
-	private final static short CLIENT_ARG_LENGTH = 8;
-	private final static short CLIENT_ARG_HOST_POS = 2;// -h
-	private final static short CLIENT_ARG_PORT_POS = 4;// -p
-	private final static short CLIENT_ARG_TIME_POS = 6;// -t
+	private final static short CLIENT_ARG_LENGTH = 7;
+	private final static short CLIENT_ARG_HOST_POS = 1;// -h
+	private final static short CLIENT_ARG_PORT_POS = 3;// -p
+	private final static short CLIENT_ARG_TIME_POS = 5;// -t
 
 	/**
 	 * Check and validate the client/server type indicated in the command arguments
@@ -45,11 +45,11 @@ public class Manager {
 			// check if the flags are in place properly
 			if (args.length != CLIENT_ARG_LENGTH)
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[CLIENT_ARG_HOST_POS] != "-h")
+			if (!args[CLIENT_ARG_HOST_POS].equals("-h"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[CLIENT_ARG_PORT_POS] != "-p")
+			if (!args[CLIENT_ARG_PORT_POS].equals("-p"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[CLIENT_ARG_TIME_POS] != "-t")
+			if (!args[CLIENT_ARG_TIME_POS].equals("-t"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
 			Integer portNum = Integer.parseInt(args[CLIENT_ARG_PORT_POS + 1]);
 			if (portNum < 1024 || portNum > 65535)
@@ -64,7 +64,7 @@ public class Manager {
 			// check if the flags are in place properly
 			if (args.length != SERVER_ARG_LENGTH)
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[SERVER_ARG_PORT_POS] != "-p")
+			if (!args[SERVER_ARG_PORT_POS].equals("-p"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
 			Integer portNum = Integer.parseInt(args[SERVER_ARG_PORT_POS + 1]);
 			if (portNum < 1024 || portNum > 65535)
