@@ -21,8 +21,6 @@ public class IperferClient extends Iperfer {
 	 * Runs an iperfer client which sends data to a server for a determined amount of time
 	 */
 	void run() {
-		long start = System.nanoTime();
-		long end = start + time*(long)NANO_CONVERS;
 		byte[] oneKB = new byte[1000];
 		try {
 			// Creates a new socket and data stream
@@ -30,6 +28,8 @@ public class IperferClient extends Iperfer {
 			DataOutputStream out = new DataOutputStream(conn.getOutputStream());
 			int count = 0;
 			// Continuously sends 1 KB until the end time is reached
+			long start = System.nanoTime();
+			long end = start + time*(long)NANO_CONVERS;
 			while(System.nanoTime() < end) {
 				out.write(oneKB);
 				count++;
