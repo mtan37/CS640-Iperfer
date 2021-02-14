@@ -23,10 +23,15 @@ public class Manager {
 	 * 
 	 */
 	public static boolean validateType(String[] args) throws InvalidArgsException {
-		if (args[ARG_TYPE_POS].equals("-c")) {
-			return true;
-		} else if (args[ARG_TYPE_POS].equals("-s")) {
-			return false;
+		try {
+			if (args[ARG_TYPE_POS].equals("-c")) {
+				return true;
+			} else if (args[ARG_TYPE_POS].equals("-s")) {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			throw new InvalidArgsException("Error: missing or additional arguments");
 		}
 		throw new InvalidArgsException("Error: missing or additional arguments");
 	}
@@ -45,11 +50,11 @@ public class Manager {
 			// check if the flags are in place properly
 			if (args.length != CLIENT_ARG_LENGTH)
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[CLIENT_ARG_HOST_POS] != "-h")
+			if (!args[CLIENT_ARG_HOST_POS].equals("-h"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[CLIENT_ARG_PORT_POS] != "-p")
+			if (!args[CLIENT_ARG_PORT_POS].equals("-p"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[CLIENT_ARG_TIME_POS] != "-t")
+			if (!args[CLIENT_ARG_TIME_POS].equals("-t"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
 			Integer portNum = Integer.parseInt(args[CLIENT_ARG_PORT_POS + 1]);
 			if (portNum < 1024 || portNum > 65535)
@@ -64,7 +69,7 @@ public class Manager {
 			// check if the flags are in place properly
 			if (args.length != SERVER_ARG_LENGTH)
 				throw new InvalidArgsException("Error: missing or additional arguments");
-			if (args[SERVER_ARG_PORT_POS] != "-p")
+			if (!args[SERVER_ARG_PORT_POS].equals("-p"))
 				throw new InvalidArgsException("Error: missing or additional arguments");
 			Integer portNum = Integer.parseInt(args[SERVER_ARG_PORT_POS + 1]);
 			if (portNum < 1024 || portNum > 65535)
@@ -94,12 +99,13 @@ public class Manager {
 			prog.run();
 		} catch (InvalidArgsException e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();// DELETE
+			e.printStackTrace();
 		} catch (InvalidPortNumberException e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();// DELETE
+			e.printStackTrace();
 		} catch (NumberFormatException e) {
-			e.printStackTrace();// DELETE
+			System.out.println("Error: port number must be in the range 1024 to 65535");
+			e.printStackTrace();
 		}
 	}
 }
