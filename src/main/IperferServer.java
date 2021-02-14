@@ -34,19 +34,19 @@ public class IperferServer extends Iperfer {
 			//store the size of the incoming data
 			dataSizeByte += inputLine.getBytes().length;
 		}
+		//keep track to time - end
+		long end = System.nanoTime();
+		
 		//add the stored size into a larger unit
 		long toAdd = (long) (dataSizeByte/KB_TO_BYTE);
 		dataSizeByte -= toAdd * KB_TO_BYTE;
 		dataSizeKB += toAdd;
-		System.out.println("test: loop ended");
-		clientSocket.close();
-		serverSocket.close();
-		//keep track to time - end
-		long end = System.nanoTime();
 		//calculate the data transfer rate in Mbps
 		double speed = (dataSizeKB/KB_TO_BYTE)/((end-start)/SEC_TO_NANO);
 		//print out summary
 		this.printSummary(dataSizeKB, speed);
+		clientSocket.close();
+		serverSocket.close();
 		//stop the program
 		System.exit(0);
 		} catch (IOException e) {
