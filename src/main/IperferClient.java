@@ -21,8 +21,6 @@ public class IperferClient extends Iperfer {
 	 * Runs an iperfer client which sends data to a server for a determined amount of time
 	 */
 	void run() {
-		long start = System.nanoTime();
-		long end = start + time*(long)NANO_CONVERS;
 		byte[] oneKB = new byte[1000];
 		try {
 			// Creates a new socket and data stream
@@ -30,14 +28,17 @@ public class IperferClient extends Iperfer {
 			DataOutputStream out = new DataOutputStream(conn.getOutputStream());
 			int count = 0;
 			// Continuously sends 1 KB until the end time is reached
-			while(System.nanoTime() < end) {
+			long start = System.nanoTime();
+			long end = start + time*(long)NANO_CONVERS;
+			long sent_end ;
+			while((sent_end = System.nanoTime()) < end) {
 				out.write(oneKB);
 				count++;
 			}
 			conn.close();
 			
 			// Finds the time spent and calculates the rate in Mbps
-			long totalTime = System.nanoTime() - start;
+			long totalTime = sent_end - start;
 			double rate = ((count*8/1000.0)/(totalTime/NANO_CONVERS));
 			this.printSummary(count, rate);
 			
@@ -53,12 +54,4 @@ public class IperferClient extends Iperfer {
 	void printSummary(double dataKB, double rate) {
 		System.out.println("sent=" + dataKB + " KB " + "rate=" + rate + " Mbps");
 	}
-	
-	/**
-	 * Sends a 1000 byte chunk of data to the server
-	 */
-	private void sendData() {
-		//TODO
-	}
-
 }
