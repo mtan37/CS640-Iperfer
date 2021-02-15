@@ -39,7 +39,7 @@ public class IperferClient extends Iperfer {
 			
 			// Finds the time spent and calculates the rate in Mbps
 			long totalTime = sent_end - start;
-			double rate = ((count/1000.0)/(totalTime/NANO_CONVERS));
+			double rate = ((count*8/1000.0)/(totalTime/NANO_CONVERS));
 			this.printSummary(count, rate);
 			
 		} catch(UnknownHostException e) {
@@ -54,12 +54,4 @@ public class IperferClient extends Iperfer {
 	void printSummary(double dataKB, double rate) {
 		System.out.println("sent=" + dataKB + " KB " + "rate=" + rate + " Mbps");
 	}
-	
-	/**
-	 * Sends a 1000 byte chunk of data to the server
-	 */
-	private void sendData() {
-		//TODO
-	}
-
 }

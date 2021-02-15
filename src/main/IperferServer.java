@@ -10,6 +10,7 @@ public class IperferServer extends Iperfer {
 
 	private static final double SEC_TO_NANO = 1_000_000_000.0;
 	private static final double KB_TO_BYTE = 1000.0;
+	private static final double BYTE_TO_BIT = 8.0;
 	private int serverPort = 0;
 	IperferServer(int serverPort) {
 		this.serverPort = serverPort;
@@ -42,7 +43,7 @@ public class IperferServer extends Iperfer {
 		dataSizeByte -= toAdd * KB_TO_BYTE;
 		dataSizeKB += toAdd;
 		//calculate the data transfer rate in Mbps
-		double speed = (dataSizeKB/KB_TO_BYTE)/((end-start)/SEC_TO_NANO);
+		double speed = ((dataSizeKB/KB_TO_BYTE)*BYTE_TO_BIT)/((end-start)/SEC_TO_NANO);
 		//print out summary
 		this.printSummary(dataSizeKB, speed);
 		clientSocket.close();
