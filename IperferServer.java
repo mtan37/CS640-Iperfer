@@ -4,8 +4,6 @@
 //	Assignment:  Assignment 1 - Iperfer
 //
 ////////////////////////////////////////////////////////
-package main;
-
 import java.io.IOException;
 import java.io.BufferedInputStream;
 import java.net.ServerSocket;

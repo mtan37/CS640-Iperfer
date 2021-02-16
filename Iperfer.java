@@ -4,7 +4,6 @@
 //	Assignment:  Assignment 1 - Iperfer
 //
 ////////////////////////////////////////////////////////
-package main;
 import java.util.HashMap;
 
 import Exceptions.*;

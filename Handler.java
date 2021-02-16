@@ -4,8 +4,6 @@
 //	Assignment:  Assignment 1 - Iperfer
 //
 ////////////////////////////////////////////////////////
-package main;
-
 abstract class Handler {
 
 	/*
