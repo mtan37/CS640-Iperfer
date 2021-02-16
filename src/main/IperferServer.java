@@ -2,7 +2,7 @@ package main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.BufferedInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,18 +23,20 @@ public class IperferServer extends Iperfer {
 		ServerSocket serverSocket = new ServerSocket(serverPort);
 		//Waiting for connection from client
 		Socket clientSocket = serverSocket.accept();
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(clientSocket.getInputStream()));
-		String inputLine;
+		BufferedInputStream in = new BufferedInputStream(
+		        new BufferedInputStream(clientSocket.getInputStream()));
+		byte[] kiloBytes = new byte[(int)KB_TO_BYTE];
+		int bytes = 0;
 		long dataSizeByte = 0;
 		long dataSizeKB = 0;
 		//keep track to time - start
 		long start = System.nanoTime();
 		//keep reading data from client until client closes connection
-		while((inputLine = in.readLine()) != null) {
+		while((bytes = in.read(kiloBytes, 0, (int)KB_TO_BYTE)) != -1){
 			//store the size of the incoming data
-			dataSizeByte += inputLine.getBytes().length;
+			dataSizeByte += bytes;
 		}
+		
 		//keep track to time - end
 		long end = System.nanoTime();
 		
