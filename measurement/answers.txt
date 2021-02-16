@@ -15,7 +15,7 @@ The actual results are simmilar.
 3 pairs - Latency: 160ms for all three. || Rate: ~10Mbps for pair 1. ~5Mbps for pairs 2 and 3.
 
 The results for latency are exactly what was expected. This is because the higher usage of the link doesn't
-have a major imapact on the time it takes a packet to get to its destination. Latency would only be imapacted
+have a major imapact on the time it takes a packet to get to its destination due to multiplexing. Latency would only be imapacted
 if there was congestion on the path.
 
 The results for rate were slightly different than our predictions. It seems that one of the connections is
