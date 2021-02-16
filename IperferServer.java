@@ -65,7 +65,7 @@ public class IperferServer extends Handler {
 
 	@Override
 	void printSummary(double DataKB, double rate) {
-		System.out.printf("recieved=%d KB rate=%.3f Mbps\n", DataKB, rate);
+		System.out.printf("recieved=%d KB rate=%.3f Mbps\n", dataKB, (float)rate);
 	}
 
 }
