@@ -1,9 +1,15 @@
+////////////////////////////////////////////////////////
+// 
+//	Authors:     Marvin Tan, Jacob Biese
+//	Assignment:  Assignment 1 - Iperfer
+//
+////////////////////////////////////////////////////////
 package main;
 
 import java.io.*;
 import java.net.*;
 
-public class IperferClient extends Iperfer {
+public class IperferClient extends Handler {
 	private String serverName;
 	private int serverPort;
 	private Socket conn;
@@ -21,6 +27,7 @@ public class IperferClient extends Iperfer {
 	 * Runs an iperfer client which sends data to a server for a determined amount of time
 	 */
 	void run() {
+		// Creates a 1KB block of data initialized to 0
 		byte[] oneKB = new byte[1000];
 		try {
 			// Creates a new socket and data stream
@@ -35,6 +42,7 @@ public class IperferClient extends Iperfer {
 				out.write(oneKB);
 				count++;
 			}
+			// Closes the connection
 			conn.close();
 			
 			// Finds the time spent and calculates the rate in Mbps

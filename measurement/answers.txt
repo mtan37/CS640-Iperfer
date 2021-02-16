@@ -1,0 +1,39 @@
+Q2:
+The expected latency between h1 and h4 should be 80+20+60 = 160ms and the throughput should be 20Mbps.
+
+The measured average RTT was 161.4 with a throughput of ~20.
+This makes sense becasue the total latency is the sum of the latency for each link in the path. This
+is 80 for L1, 20 for L2, 60 for L3 which adds up to 160. The thoughput is determined by the slowest link
+in the path which is L1 with a speed of 20Mbps.
+
+Q3:
+The expected latency and throughput for 2 pairs should be 160ms and 20/2 = 10Mbps.
+The expected latency and throughput for 3 pairs should be 160ms and 20/3 = ~6.6Mbps.
+
+The actual results are simmilar.
+2 pairs - Latency: 160ms for both || Rate: 12Mbps for pair 1. 8MBps for pair 2.
+3 pairs - Latency: 160ms for all three. || Rate: ~10Mbps for pair 1. ~5Mbps for pairs 2 and 3.
+
+The results for latency are exactly what was expected. This is because the higher usage of the link doesn't
+have a major imapact on the time it takes a packet to get to its destination. Latency would only be imapacted
+if there was congestion on the path.
+
+The results for rate were slightly different than our predictions. It seems that one of the connections is
+slightly favored over the others. Overall, the speeds are still close to an even split of the bandwith of L1
+which was anticipated. 
+
+
+Q4:
+For h1-h4 we expect a latency of 160ms and a rate of ~17Mbps
+For h5-h6 we expect a latency of 20+10+10 = 40ms and a rate of ~23Mbps
+
+Results:
+h1-h4: Latency: 160.1ms || Rate: ~18.5Mbps
+h5-h6: Latency: 40.1ms || Rate: ~21.5Mbps
+
+The latency results perfectly match our predictions for the same reason as Q3.
+
+The results for rate are close to our predictions. The reason for these numbers is that L2 slightly limits the
+rate for the two pairs. L2 has a bandwidth of 40 and h1-h4 can take 20Mbps of that while h5-h6 could take 25Mbps.
+This means we are losing around 5Mbps due to this link and this loss is split between the two pairs resulting in 
+h1-h4 being slightly under 20Mbps and h5-h6 being slightly above 20Mbps.

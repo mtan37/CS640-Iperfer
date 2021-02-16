@@ -1,12 +1,17 @@
+////////////////////////////////////////////////////////
+// 
+//	Authors:     Marvin Tan, Jacob Biese
+//	Assignment:  Assignment 1 - Iperfer
+//
+////////////////////////////////////////////////////////
 package main;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.BufferedInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class IperferServer extends Iperfer {
+public class IperferServer extends Handler {
 
 	private static final double SEC_TO_NANO = 1_000_000_000.0;
 	private static final double KB_TO_BYTE = 1000.0;
