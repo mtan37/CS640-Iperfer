@@ -58,6 +58,6 @@ public class IperferClient extends Handler {
 	}
 	
 	void printSummary(double dataKB, double rate) {
-		System.out.println("sent=" + dataKB + " KB " + "rate=" + rate + " Mbps");
+		System.out.printf("sent=%d KB rate=%.3d Mbps\n", dataKB, rate);
 	}
 }
