@@ -1,9 +1,14 @@
-package main;
+////////////////////////////////////////////////////////
+// 
+//	Authors:     Marvin Tan, Jacob Biese
+//	Assignment:  Assignment 1 - Iperfer
+//
+////////////////////////////////////////////////////////
 import java.util.HashMap;
 
 import Exceptions.*;
 
-public class Manager {
+public class Iperfer {
 
 	private final static short ARG_TYPE_POS = 0;
 
@@ -84,7 +89,7 @@ public class Manager {
 		try {
 			boolean isClient = validateType(args);
 			HashMap<String, Object> argsList = validateArgs(args, isClient);
-			Iperfer prog = null;
+			Handler prog = null;
 			if (isClient) {
 				// create an instance of IperferClient
 				String host = (String) argsList.get("host");

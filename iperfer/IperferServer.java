@@ -1,12 +1,15 @@
-package main;
-
-import java.io.BufferedReader;
+////////////////////////////////////////////////////////
+// 
+//	Authors:     Marvin Tan, Jacob Biese
+//	Assignment:  Assignment 1 - Iperfer
+//
+////////////////////////////////////////////////////////
 import java.io.IOException;
 import java.io.BufferedInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class IperferServer extends Iperfer {
+public class IperferServer extends Handler {
 
 	private static final double SEC_TO_NANO = 1_000_000_000.0;
 	private static final double KB_TO_BYTE = 1000.0;
@@ -62,8 +65,7 @@ public class IperferServer extends Iperfer {
 
 	@Override
 	void printSummary(double DataKB, double rate) {
-		System.out.println(
-				"recieved=" + DataKB + " KB " + "rate=" + rate + " Mbps");
+		System.out.printf("recieved=%.0f KB rate=%.3f Mbps\n", DataKB, rate);
 	}
 
 }

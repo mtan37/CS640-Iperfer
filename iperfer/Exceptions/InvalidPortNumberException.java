@@ -1,6 +1,8 @@
 package Exceptions;
 
 public class InvalidPortNumberException extends Exception {
+	
+	private static final long serialVersionUID = 5129425694758595857L;
 
 	public InvalidPortNumberException() {
 	}
